@@ -1,0 +1,38 @@
+:- Enable CORS with Proxy Configuration Settings in Angular.
+
+To enable CORS via proxy configuration, we need to generate a src/proxy.conf.json file inside the Angular root folder
+and also place the following code inside of it.
+
+{
+    "/api/*": {
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
+
+
+*********************************************************************************************************
+
+
+
+:- Define Proxy Configuration values in angular.json
+
+To register a proxy configuration, we need to go to the angular.json file and place the following code inside the serve/options. 
+It will set the src/proxy.conf.json file in our Angular app.
+
+
+"architect": {
+    "serve": {
+            "builder": "@angular-devkit/build-angular:dev-server",
+            "options": {
+                "browserTarget": "project-name:build",
+                "proxyConfig": "src/proxy.conf.json"
+            },
+          }
+}
+
+*************************************************************************************************************
+
+Please restart the server if you make any update in your proxy conf file.
+ng serve
